@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 
 import api from './routes';
 
@@ -6,6 +6,8 @@ const app = express();
 
 app.use(express.json());
 
-app.use(api);
+app.get('/', (req: Request, res: Response) => { res.send('App is working!'); });
 
-export default app;
+app.use('/api', api);
+
+export = app;
