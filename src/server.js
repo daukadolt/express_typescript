@@ -1,7 +1,7 @@
 require('dotenv/config');
 
 const mongoose = require('mongoose');
-const app = require('./src/app');
+const app = require('./app');
 
 mongoose.connect(process.env.MONGO_PROD_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
