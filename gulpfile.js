@@ -7,7 +7,7 @@ const { src, dest, task } = gulp;
 const tsProject = ts.createProject('./tsconfig.json');
 
 task('eslint', () => {
-    return src(['src/**/*.js', 'tests/**/*.js'])
+    return src(['tests/**/*.js'])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
@@ -23,4 +23,4 @@ task('clean', () => {
     return del('./dist');
 });
 
-task('default', gulp.series('eslint', 'clean', 'build'));
+task('default', gulp.series('clean', 'build', 'eslint'));
