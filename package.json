@@ -5,7 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "test": "jest --forceExit",
-    "pretest": "eslint \"**/*.js\""
+    "pretest": "gulp"
   },
   "repository": {
     "type": "git",
@@ -25,10 +25,18 @@
     "validator": "^13.0.0"
   },
   "devDependencies": {
+    "@types/express": "^4.17.6",
+    "@types/mongoose": "^5.7.23",
+    "del": "^5.1.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
+    "gulp-eslint": "^6.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "jest": "^25.2.3",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "typescript": "^3.9.5"
   }
 }

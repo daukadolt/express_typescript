@@ -1,5 +1,5 @@
-const express = require('express');
-const { conferenceController } = require('../controllers/index');
+import express from 'express';
+import { conferenceController } from '../controllers';
 
 const router = express.Router();
 
@@ -9,4 +9,4 @@ router.post('/new', conferenceController.createNewConference);
 
 router.post('/search', conferenceController.searchConference);
 
-module.exports = router;
+export = router;

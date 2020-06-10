@@ -1,17 +1,19 @@
-const { conferenceService } = require('../services/index');
+import { Request, Response } from 'express';
 
-const { ValidationError, DuplicateKeyError } = require('../errors/index');
+import { conferenceService } from '../services';
+import { ValidationError, DuplicateKeyError } from '../errors';
+import { Conference } from '../models';
 
-const getAllConferences = async (req, res) => {
+const getAllConferences = async (req: Request, res: Response): Promise<Response> => {
     try {
-        const allConferences = await conferenceService.getAllConferences();
+        const allConferences: Conference.Document[] = await conferenceService.getAllConferences();
         return res.json(allConferences);
     } catch (e) {
         return res.sendStatus(500);
     }
 };
 
-const createNewConference = async (req, res) => {
+const createNewConference = async (req: Request, res: Response): Promise<Response> => {
     try {
         const conferenceData = req.body;
         await conferenceService.createNewConference(conferenceData);
@@ -27,7 +29,7 @@ const createNewConference = async (req, res) => {
     }
 };
 
-const searchConference = async (req, res) => {
+const searchConference = async (req: Request, res: Response): Promise<Response> => {
     try {
         return res.json(await conferenceService.searchConference(req.body));
     } catch (e) {
@@ -35,7 +37,7 @@ const searchConference = async (req, res) => {
     }
 };
 
-module.exports = {
+export {
     getAllConferences,
     createNewConference,
     searchConference,

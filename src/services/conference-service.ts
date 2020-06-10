@@ -1,23 +1,25 @@
-const moment = require('moment');
-const mongoose = require('mongoose');
-const { Conference } = require('../models/index');
-const { DuplicateKeyError } = require('../errors/index');
+import moment from 'moment';
+import mongoose from 'mongoose';
+
+import { Conference } from '../models';
+import { DuplicateKeyError } from '../errors';
 
 const { ObjectId } = mongoose.Types;
 
-const getAllConferences = async () => Conference.Model.find({});
+const getAllConferences = async (): Promise<Conference.Document[]> =>
+    Conference.Model.find({});
 
-const createNewConference = async (conferenceData) => {
+const createNewConference = async (conferenceData): Promise<void> => {
     try {
-        const newConference = new Conference.Model(conferenceData);
-        await newConference.save({ checkKeys: false });
+        const newConference: Conference.Document = new Conference.Model(conferenceData);
+        await newConference.save();
     } catch (e) {
         if (e.name === 'MongoError' && e.code === 11000) throw new DuplicateKeyError();
         throw e;
     }
 };
 
-const searchConference = async (conferenceData) => {
+const searchConference = async (conferenceData): Promise<Conference.Document[]> => {
     const caseInsensitiveDotNotation = (conferenceObject) => {
         const resultingObject = {};
         Object.keys(conferenceObject).forEach((key) => {
@@ -42,11 +44,12 @@ const searchConference = async (conferenceData) => {
         });
         return resultingObject;
     };
+
     const searchFor = caseInsensitiveDotNotation(conferenceData);
     return Conference.Model.find(searchFor);
 };
 
-module.exports = {
+export {
     getAllConferences,
     createNewConference,
     searchConference,

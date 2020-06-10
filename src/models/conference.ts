@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
+import mongoose, { Schema, Document } from 'mongoose';
+import validator from 'validator';
 
-const ConferenceSchema = new mongoose.Schema({
+const ConferenceSchema: Schema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -48,8 +48,24 @@ const ConferenceSchema = new mongoose.Schema({
     },
 }, { minimize: false });
 
-const Model = mongoose.model('Conferences', ConferenceSchema);
+interface ConferenceDocument extends Document {
+    title: string,
+    projects: string[],
+    location: {
+        city: string,
+        country: string,
+    },
+    tags: string[],
+    dateStart: Date,
+    dateFinish: Date,
+    participants: object,
+    ytLink: string,
+    attendance: number,
+    link: string,
+    comments: string[],
+    status: string,
+}
 
-module.exports = {
-    Model,
-};
+const Model = mongoose.model<ConferenceDocument>('Conference', ConferenceSchema);
+
+export { ConferenceDocument as Document, Model };
