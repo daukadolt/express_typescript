@@ -4,7 +4,7 @@ const ts = require('gulp-typescript');
 const del = require('del');
 
 const { src, dest, task } = gulp;
-const tsProject = ts.createProject('tsconfig.json');
+const tsProject = ts.createProject('./tsconfig.json');
 
 task('eslint', () => {
     return src(['src/**/*.js'])
